@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import React from "react";
+import { useState } from "react";
+import Timer from "./Components/Timer/Timer";
+import Btn from "./Components/Btn/Btn";
 
 function App() {
+  const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
+  const [clearInter,setClearInter]=useState();
+
+  const start = () => {
+    run();
+    setClearInter(setInterval(run, 1000));
+  };
+
+  let seconds = time.s,
+    minutes = time.m,
+    hours = time.h;
+
+  const run = () => {
+
+    if (minutes === 60) {
+      hours++;
+      minutes = 0;
+    }
+
+    if (seconds === 60) {
+      minutes++;
+      seconds = 0;
+    }
+
+    seconds++;
+    setTime({ h: hours, m: minutes, s: seconds });
+  };
+
+  const stop=()=>{
+    clearInterval(clearInter);
+  }
+
+  const reset=()=>{
+    clearInterval(clearInter);
+    setTime({ h: 0, m: 0, s:0}); 
+  }
+
+  const wait=()=>{
+    clearInterval(clearInter);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <Timer timer={time} />
+      <Btn start={start} stop={stop} reset={reset} wait={wait} />
     </div>
   );
 }

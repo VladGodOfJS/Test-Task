@@ -1,0 +1,22 @@
+.wrapper-btn {
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  
+    &__btn {
+      background-color: #f8de15;
+      padding: 7px 28px;
+      border: transparent;
+      border-radius: 3px;
+      outline: none;
+      font-size: 16px;
+      font-family: "Roboto Condensed", sans-serif;
+      cursor: pointer;
+    }
+  }
+  
+  .btn:hover {
+    background: #ffe045;
+  }
